@@ -1,0 +1,287 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <main class="container-fluid d-flex flex-column small bg-light">
+      <div class="row small min-vh-100 bg-dark" id="dashbord">
+        <div class="container" data-aos="fade-up">
+          
+
+        </div>
+      </div>
+<!-- *********************************************** SECTION LIST PERSONNEL ****************************************** -->
+      <div class="row small min-vh-100 ms-auto px-3 col-11" id="personnel_list">
+        <div class="container" data-aos="fade-up">
+          <div class="row p-2 m-1">
+            <span class="h6 p-2 text-center"> Personels </span>
+          </div>
+          <div class="row small">
+            <div class="col-lg-3 overflow-auto border  bg-geserhos-light" style="min-height:40dvi; max-height: 40vw;">
+                
+                <div id="tableService bg-geserhos-light" class=''>
+                    <div class="header small text-center p-2">
+                        <div class="input-group">
+                        <input type="search" class="form-control form-control-sm" name="q" id="rechPatient" placeholder="Recherche">
+                        <button class="btn btn-primary btn-sm"><i class="bi bi-search"></i></button>
+                        </div>
+                        <hr class="m-2"/>
+                        <div class="btn-group btn-group-sm">
+                            <a href="{% url 'ajout-personnel' %}" class="btn btn-outline-info" >
+                                Ajouter
+                            </a>
+                        </div>
+                    </div>
+                    <div class="list-group list-group-flush border-top border-bottom bg-geserhos-light overflow-auto " style="max-height:33vw;">
+                        {% for item in list_personnels %}
+                            <div class="list-group-item {% if personnel.id == item.id %} active {% endif %}" onclick="document.location='?req={{item.id}}'" style="cursor: pointer;">
+                                {% if item.nom %}{{item.nom}}{%endif%}
+                                {% if item.prenom %}{{item.prenom}}{%endif%}
+                                {% if item.Age %}({{item.Age}}){%endif%}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 text-center bg-light">
+                {% if personnel %}
+                <!-- *************************   ONGLET DE NAVAIGATION  ********************** -->
+                <ul class="nav nav-tabs small shadow-sm">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="nav-Info-tap" data-bs-toggle="tab" type="button" data-bs-target="#tap-Info" role="tab" aria-controls="tap-Info" aria-selected="true">Informations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-resume-tap" data-bs-toggle="tab" type="button" data-bs-target="#tap-resume" role="tab" aria-controls="tap-resume" aria-selected="false">Resume</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-expAca-tap" data-bs-toggle="tab" type="button" data-bs-target="#tap-expAca" role="tab" aria-controls="tap-expAca" aria-selected="false">Expérience académique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-expPro-tap" data-bs-toggle="tab" type="button" data-bs-target="#tap-expPro" role="tab" aria-controls="tap-expPro" aria-selected="false">Expérience professionnelle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-competences-tap" data-bs-toggle="tab" type="button" data-bs-target="#tap-competences" role="tab" aria-controls="tap-competences" aria-selected="false">Competences</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-services-tap" data-bs-toggle="tab" type="button" data-bs-target="#tap-services" role="tab" aria-controls="tap-services" aria-selected="false">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-realisations-tap" data-bs-toggle="tab" type="button" data-bs-target="#tap-realisations" role="tab" aria-controls="tap-realisations" aria-selected="false">Réalisation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-reglage-tap" data-bs-toggle="tab" type="button" data-bs-target="#tap-reglage" role="tab" aria-controls="tap-reglage" aria-selected="false">Reglage</a>
+                    </li>
+                </ul>
+                <div id="PatientTabContent" class="tab-content small slide pointer-event bg-white">
+<!-- ############################# ONGLET Informations  ########################## -->
+                    <div class="tab-pane fade show active p-2" role="tabpanel" aria-labelledby="nav-Info-tap" id="tap-Info" style="min-height:35vw; max-height: 40vw;">
+                      
+                        <div class="row m-3">
+                          <a href="{% url 'modif-personnel' personnel.id %}" class="link-primary"> modifier </a>
+                        </div>
+                        <div class="container-fluid m-2 p-1 text-start" style="min-height: 35vw;">
+                            <span class="h6 m-2">{% if personnel.nom %}{{personnel.nom}}{%endif%} {% if personnel.prenom %}{{personnel.prenom}}{%endif%}, {% if personnel.Age %}{{personnel.Age}}{%endif%}</span>
+                            <div class="col-6">{% if personnel.email %}{{personnel.email}}{%endif%}</div>
+                            <div class="col-6">{% if personnel.sexe %}{{personnel.sexe}}{%endif%}</div>
+                            <div class="col-6">{% if personnel.telephone_1 %}{{personnel.telephone_1}}{%endif%}</div>
+                            <div class="col-6">{% if personnel.telephone_2 %}{{personnel.telephone_2}}{%endif%}</div>
+                            <div class="col-6">{% if personnel.pays %}{{personnel.pays}}{%endif%}</div>
+                            <div class="col-6">{% if personnel.ville %}{{personnel.ville}}{%endif%}</div>
+                        </div>
+                    </div>
+<!-- ############################# ONGLET RESUME  ########################## -->
+                    <div class="tab-pane fade show p-2" role="tabpanel" aria-labelledby="nav-resume-tap" id="tap-resume" style="min-height:35vw; max-height: 40vw;">
+                        <div class="container-fluid text-start "  style="min-height:35vw;">
+                            
+                        </div>
+                    </div>
+<!-- ############################# ONGLET COMPETENCE  ########################## -->
+                    <div class="tab-pane fade show p-2" role="tabpanel" aria-labelledby="nav-competences-tap" id="tap-competences" style="min-height:35vw; max-height: 40vw;">
+                        <div class="container-fluid text-start "  style="min-height:35vw;">
+                            <div class="row text-end">
+                              <div class="col">
+                                <a href="{% url 'ajout-competence' %}" class="btn btn-primary btn-sm"> Ajouter une compétence </a>
+                              </div>
+                            </div>
+                            {% if competence %}
+                              {% for comp in competence %}
+                                {{comp.competence}}
+                                {{comp.description}}
+                                {{comp.niveau}}
+                                <hr class="my-2"/>
+                              {% endfor %}
+                            {%else%}
+                              <div class="container-fluid align-content-center m-auto">
+                                <span class="text-center">
+                                    Aucune compétence pour le moment.
+                                </span>
+                              </div>
+                            {% endif %}
+                        </div>
+                    </div>
+<!-- ############################# ONGLET EXPERIENCE ACADEMIQUE  ########################## -->
+                    <div class="tab-pane fade show p-2" role="tabpanel" aria-labelledby="nav-expAca-tap" id="tap-expAca" style="min-height:35vw; max-height: 40vw;">
+                        <div class="container-fluid text-start "  style="min-height:35vw;">
+                            <div class="row text-end">
+                              <div class="col">
+                                <a href="{% url 'ajout-expAca' %}" class="btn btn-primary btn-sm"> Ajouter une expérience académique </a>
+                              </div>
+                            </div>
+                            {% if exp_academique %}
+                              {% for exp in exp_academique %}
+                                <span class="badge bg-success">{{exp.statut}}</span>
+                                <div class="col-6">{{exp.annee_debut}} - {{exp.annee_fin}}</div>
+                                <div class="col-6">{{exp.ecole}}</div>
+                                <div class="col-6">{{exp.filiere}}</div>
+                                <div class="col-6">{{exp.diplome}}</div>
+                                <div class="col-6">{{exp.pays}}</div>
+                                <div class="col-6">{{exp.ville}}</div>
+                                <hr class="my-2">
+                              {% endfor %}
+                            {%else%}
+                              <div class="container-fluid align-content-center m-auto">
+                                <span class="text-center">
+                                    Aucune expérience académique pour le moment.
+                                </span>
+                              </div>
+                            {% endif %}
+                        </div>
+                    </div>
+<!-- ############################# ONGLET EXPERIENCE PROFESSIONNELLE  ########################## -->
+                    <div class="tab-pane fade show p-2" role="tabpanel" aria-labelledby="nav-expPro-tap" id="tap-expPro" style="min-height:35vw; max-height: 40vw;">
+                        <div class="container-fluid text-start "  style="min-height:35vw;">
+                            <div class="row text-end">
+                              <div class="col">
+                                <a href="{% url 'ajout-expPro' %}" class="btn btn-primary btn-sm"> Ajouter une expérience professionnelle </a>
+                              </div>
+                            </div>
+                            {% if exp_professionnel %}
+                              {% for exp in exp_professionnel %}
+                                <span class="badge bg-success">{{exp.statut}}</span>
+                                <div class="col-6">{{exp.date_debut}} - {{exp.date_fin}}</div>
+                                <div class="col-6">{{exp.entreprise}}</div>
+                                <div class="col-6">{{exp.poste}}</div>
+                                <div class="col-6">{{exp.diplome}}</div>
+                                <div class="col-6">{{exp.pays}}</div>
+                                <div class="col-6">{{exp.ville}}</div>
+                                <hr class="my-2"/>
+                              {% endfor %}
+                            {%else%}
+                              <div class="container-fluid align-content-center m-auto">
+                                <span class="text-center">
+                                    Aucune expérience professionnelle pour le moment.
+                                </span>
+                              </div>
+                            {% endif %}
+                        </div>
+                    </div>
+<!-- ############################# ONGLET SERVICES  ########################## -->
+                    <div class="tab-pane fade show p-2" role="tabpanel" aria-labelledby="nav-services-tap" id="tap-services" style="min-height:35vw; max-height: 40vw;">
+                        <div class="container-fluid text-start "  style="min-height:35vw;">
+                          <div class="row text-end">
+                            <div class="col">
+                              <a href="{% url 'ajout-service' %}" class="btn btn-primary btn-sm"> Ajouter un service </a>
+                            </div>
+                          </div>
+                          {% if service %}
+                            {% for serv in service %}
+                              <div class="col-6">{{serv.service}}</div>
+                              <div class="col-6">{{serv.description}}</div>
+                              <div class="col-6"><img src="{{serv.photo.url}}" alt=""></div>
+                              <hr class="my-2"/>
+                            {% endfor %}
+                          {%else%}
+                            <div class="container-fluid align-content-center m-auto">
+                              <span class="text-center">
+                                  Aucune service enregistré pour le moment.
+                              </span>
+                            </div>
+                          {% endif %}
+                        </div>
+                    </div>
+<!-- ############################# ONGLET REALISATIONS  ########################## -->
+                    <div class="tab-pane fade show p-2" role="tabpanel" aria-labelledby="nav-realisations-tap" id="tap-realisations" style="min-height:35vw; max-height: 40vw;">
+                        <div class="container-fluid text-start "  style="min-height:35vw;">
+                          <div class="row text-end">
+                            <div class="col">
+                              <a href="{% url 'ajout-realisation' %}" class="btn btn-primary btn-sm"> Ajouter une réalisation </a>
+                            </div>
+                          </div>
+                          {% if realisation %}
+                            {% for real in realisation %}
+                              <div class="col-6">{{real.realisation}}</div>
+                              <div class="col-6">{{real.description}}</div>
+                              <hr class="my-2"/>
+                            {% endfor %}
+                          {%else%}
+                            <div class="container-fluid align-content-center m-auto">
+                              <span class="text-center">
+                                  Aucune réalisation pour le moment.
+                              </span>
+                            </div>
+                          {% endif %}
+                        </div>
+                    </div>
+                    
+<!-- ############################# ONGLET REGLAGE  ########################## -->
+                    <div class="tab-pane fade show p-2" role="tabpanel" aria-labelledby="nav-reglage-tap" id="tap-reglage" style="min-height:35vw; max-height: 40vw;">
+                        <div class="container-fluid text-start "  style="min-height:35vw;">
+                          <div class="accordion p-2" id="accordionListDetail">
+                            <div class="accordion-item">
+                                <button class="form-select form-select-sm small" type="button" data-bs-toggle="collapse" data-bs-target="#galerie" aria-expanded="true" aria-controls="galerie">
+                                    Galerie
+                                </button>
+                                <div id="galerie" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionListDetail" style="">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                          <div class="col-3 text-center p-2" >
+                                            <a href="{% url 'ajout-photo-galerie' %}">
+                                              <div class="card-img m-auto shadow-sm rounded-3 p-3 bg-light" style="height: 170; cursor: pointer; ">
+                                                <i class="bi bi-plus-lg m-auto" style="font-size: 22vh;"></i>
+                                              </div>
+                                            </a>
+                                          </div>
+                                          {% for image in galerie %}
+                                          <div class="col-lg-3 col-4 p-2">
+                                            <div class="card-img p-1 m-auto text-center shadow-sm rounded-3 bg-light" style="height: 160; cursor: pointer; ">
+                                              <div class="row">
+                                                <div class="col-9">
+                                                  <img src="{{ image.photo.url }}" class="rounded-2" width="100" height="150">
+                                                </div>
+                                                <div class="col-2 m-auto position-absolute bg-black">
+                                                  <div class="row">
+                                                    <div class="col">
+                                                      <span><a href="" > supprimer </a></span>
+                                                    </div>
+                                                  </div>
+                                                  <div class="row">
+                                                    <div class="col">
+                                                      <span><a href="" > profil </a></span>
+                                                    </div>
+                                                  </div>
+                                                  <div class="row">
+                                                    <div class="col">
+                                                      <span><a href="" > couverture </a></span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          {% endfor %}
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        </div>
+      </div>
+    </main>
+
+    <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
+
+{% endblock %}

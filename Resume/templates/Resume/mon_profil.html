@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <main class="container-fluid d-flex flex-column small bg-light">
+      
+<!-- *********************************************** SECTION LIST PERSONNEL ****************************************** -->
+      <div class="row small min-vh-100 ms-auto px-3 col-11" id="personnel_list">
+        <div class="container" data-aos="fade-up">
+          <div class="row p-2 m-1">
+            <span class="h6 p-2 text-center"> Personels </span>
+          </div>
+          <div class="row small">
+            <div class="col-lg-3 overflow-auto border  bg-geserhos-light" style="min-height:40dvi; max-height: 40vw;">
+                
+                
+            </div>
+            <div class="col-lg-9 text-center bg-light">
+                {% if personnel %}
+                <!-- *************************   ONGLET DE NAVAIGATION  ********************** -->
+                
+
+<!-- ############################# ONGLET Informations  ########################## -->
+                  {% if 'information' in url %}
+                        <div class="row m-3">
+                          <a href="{% url 'modif-personnel' personnel.id %}" class="link-primary"> modifier </a>
+                        </div>
+                        <div class="container-fluid m-2 p-1 text-start" style="min-height: 35vw;">
+                            <span class="h6 m-2">{% if personnel.nom %}{{personnel.nom}}{%endif%} {% if personnel.prenom %}{{personnel.prenom}}{%endif%}, {% if personnel.Age %}{{personnel.Age}}{%endif%}</span>
+                            <div class="col-6">{% if personnel.email %}{{personnel.email}}{%endif%}</div>
+                            <div class="col-6">{% if personnel.sexe %}{{personnel.sexe}}{%endif%}</div>
+                            <div class="col-6">{% if personnel.telephone_1 %}{{personnel.telephone_1}}{%endif%}</div>
+                            <div class="col-6">{% if personnel.telephone_2 %}{{personnel.telephone_2}}{%endif%}</div>
+                            <div class="col-6">{% if personnel.pays %}{{personnel.pays}}{%endif%}</div>
+                            <div class="col-6">{% if personnel.ville %}{{personnel.ville}}{%endif%}</div>
+                        </div>
+                  {%elif 'resume' in url %}
+<!-- ############################# ONGLET RESUME  ########################## -->
+                    <div class="container-fluid text-start "  style="min-height:35vw;">
+                            
+                    </div>
+
+                  {% elif 'competences' in url %}
+<!-- ############################# ONGLET COMPETENCE  ########################## -->
+                    <div class="container-fluid text-start "  style="min-height:35vw;">
+                        <div class="row text-end">
+                          <div class="col">
+                            <a href="{% url 'ajout-competence' %}" class="btn btn-primary btn-sm"> Ajouter une compétence </a>
+                          </div>
+                        </div>
+                        {% if competence %}
+                          {% for comp in competence %}
+                            {{comp.competence}}
+                            {{comp.description}}
+                            {{comp.niveau}}
+                            <hr class="my-2"/>
+                          {% endfor %}
+                        {%else%}
+                          <div class="container-fluid align-content-center m-auto">
+                            <span class="text-center">
+                                Aucune compétence pour le moment.
+                            </span>
+                          </div>
+                        {% endif %}
+                    </div>
+
+                    {% elif 'exp_academique' in url %}
+<!-- ############################# ONGLET EXPERIENCE ACADEMIQUE  ########################## -->
+                    <div class="container-fluid text-start "  style="min-height:35vw;">
+                        <div class="row text-end">
+                          <div class="col">
+                            <a href="{% url 'ajout-expAca' %}" class="btn btn-primary btn-sm"> Ajouter une expérience académique </a>
+                          </div>
+                        </div>
+                        {% if exp_academique %}
+                          {% for exp in exp_academique %}
+                            <span class="badge bg-success">{{exp.statut}}</span>
+                            <div class="col-6">{{exp.annee_debut}} - {{exp.annee_fin}}</div>
+                            <div class="col-6">{{exp.ecole}}</div>
+                            <div class="col-6">{{exp.filiere}}</div>
+                            <div class="col-6">{{exp.diplome}}</div>
+                            <div class="col-6">{{exp.pays}}</div>
+                            <div class="col-6">{{exp.ville}}</div>
+                            <hr class="my-2">
+                          {% endfor %}
+                        {%else%}
+                          <div class="container-fluid align-content-center m-auto">
+                            <span class="text-center">
+                                Aucune expérience académique pour le moment.
+                            </span>
+                          </div>
+                        {% endif %}
+                    </div>
+
+                  {% elif 'exp_professionnel' in url %}
+<!-- ############################# ONGLET EXPERIENCE PROFESSIONNELLE  ########################## -->
+                    <div class="container-fluid text-start "  style="min-height:35vw;">
+                        <div class="row text-end">
+                          <div class="col">
+                            <a href="{% url 'ajout-expPro' %}" class="btn btn-primary btn-sm"> Ajouter une expérience professionnelle </a>
+                          </div>
+                        </div>
+                        {% if exp_professionnel %}
+                          {% for exp in exp_professionnel %}
+                            <span class="badge bg-success">{{exp.statut}}</span>
+                            <div class="col-6">{{exp.date_debut}} - {{exp.date_fin}}</div>
+                            <div class="col-6">{{exp.entreprise}}</div>
+                            <div class="col-6">{{exp.poste}}</div>
+                            <div class="col-6">{{exp.diplome}}</div>
+                            <div class="col-6">{{exp.pays}}</div>
+                            <div class="col-6">{{exp.ville}}</div>
+                            <hr class="my-2"/>
+                          {% endfor %}
+                        {%else%}
+                          <div class="container-fluid align-content-center m-auto">
+                            <span class="text-center">
+                                Aucune expérience professionnelle pour le moment.
+                            </span>
+                          </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+              {%elif 'services' in url %}
+<!-- ############################# ONGLET SERVICES  ########################## -->
+                <div class="tab-pane fade show p-2" role="tabpanel" aria-labelledby="nav-services-tap" id="tap-services" style="min-height:35vw; max-height: 40vw;">
+                    <div class="container-fluid text-start "  style="min-height:35vw;">
+                      <div class="row text-end">
+                        <div class="col">
+                          <a href="{% url 'ajout-service' %}" class="btn btn-primary btn-sm"> Ajouter un service </a>
+                        </div>
+                      </div>
+                      {% if service %}
+                        {% for serv in service %}
+                          <div class="col-6">{{serv.service}}</div>
+                          <div class="col-6">{{serv.description}}</div>
+                          <div class="col-6"><img src="{{serv.photo.url}}" alt=""></div>
+                          <hr class="my-2"/>
+                        {% endfor %}
+                      {%else%}
+                        <div class="container-fluid align-content-center m-auto">
+                          <span class="text-center">
+                              Aucune service enregistré pour le moment.
+                          </span>
+                        </div>
+                      {% endif %}
+                    </div>
+                </div>
+
+              {% elif 'realisation' in url %}
+<!-- ############################# ONGLET REALISATIONS  ########################## -->
+                <div class="tab-pane fade show p-2" role="tabpanel" aria-labelledby="nav-realisations-tap" id="tap-realisations" style="min-height:35vw; max-height: 40vw;">
+                    <div class="container-fluid text-start "  style="min-height:35vw;">
+                      <div class="row text-end">
+                        <div class="col">
+                          <a href="{% url 'ajout-realisation' %}" class="btn btn-primary btn-sm"> Ajouter une réalisation </a>
+                        </div>
+                      </div>
+                      {% if realisation %}
+                        {% for real in realisation %}
+                          <div class="col-6">{{real.realisation}}</div>
+                          <div class="col-6">{{real.description}}</div>
+                          <hr class="my-2"/>
+                        {% endfor %}
+                      {%else%}
+                        <div class="container-fluid align-content-center m-auto">
+                          <span class="text-center">
+                              Aucune réalisation pour le moment.
+                          </span>
+                        </div>
+                      {% endif %}
+                    </div>
+
+                  {% elif 'autre' in url %}
+<!-- ############################# ONGLET REGLAGE  ########################## -->
+                    <div class="container-fluid text-start "  style="min-height:35vw;">
+                      <div class="accordion p-2" id="accordionListDetail">
+                        <div class="accordion-item">
+                            <button class="form-select form-select-sm small" type="button" data-bs-toggle="collapse" data-bs-target="#galerie" aria-expanded="true" aria-controls="galerie">
+                                Galerie
+                            </button>
+                            <div id="galerie" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionListDetail" style="">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                      <div class="col-3 text-center p-2" >
+                                        <a href="{% url 'ajout-photo-galerie' %}">
+                                          <div class="card-img m-auto shadow-sm rounded-3 p-3 bg-light" style="height: 170; cursor: pointer; ">
+                                            <i class="bi bi-plus-lg m-auto" style="font-size: 22vh;"></i>
+                                          </div>
+                                        </a>
+                                      </div>
+                                      {% for image in galerie %}
+                                      <div class="col-lg-3 col-4 p-2">
+                                        <div class="card-img p-1 m-auto text-center shadow-sm rounded-3 bg-light" style="height: 160; cursor: pointer; ">
+                                          <div class="row">
+                                            <div class="col-9">
+                                              <img src="{{ image.photo.url }}" class="rounded-2" width="100" height="150">
+                                            </div>
+                                            <div class="col-2 m-auto position-absolute bg-black">
+                                              <div class="row">
+                                                <div class="col">
+                                                  <span><a href="" > supprimer </a></span>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col">
+                                                  <span><a href="" > profil </a></span>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col">
+                                                  <span><a href="" > couverture </a></span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {% endfor %}
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            {%endif %}
+        </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid bg-image">
+    <div class="row align-items-center">
+      
+      <div class="col-md-10 mx-auto col-lg-6">
+        <form method="post" class="p-2 p-md-5 border rounded-3 bg-transparent">
+          <h2 class="text-center"> Connexion </h2>
+          <p><font color="red"> {{ message }} </font></p>
+            {% csrf_token %}
+            {% comment %} {{ form.as_p }} {% endcomment %}
+                {%for field in form %}
+                <div class="form-floating m-1 px-2">
+                  {% if field.errors %}
+                        {{ field }}
+                      <div class="offset-4 col-8 lg-7 is-invalid text-right">
+                        <small class="text-danger">
+                          {% for error in field.errors %}
+                            {{ error|escape }}
+                            <br/>
+                          {% endfor %}
+                        </small>
+                      </div>
+                  {% else %}
+                      {{ field }}
+                  {% endif %}
+                  <label for="{{field.id}}" > {{ field.label }} </label>
+                </div>
+                {% endfor %}
+              <hr class="my-4">
+              <button class="w-100 btn btn-primary" type="submit">Se connecter</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock%}

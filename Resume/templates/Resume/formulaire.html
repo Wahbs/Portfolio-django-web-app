@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  
+</style>
+    <div class="container-fluid" style="background-image:url({% static 'img/bg.png' %});background-position:top center;background-size:cover;">
+    <div class="row align-items-center">
+      
+      <div class="col-md-12 mx-auto col-lg-10">
+        <form method="post" class="p-1 p-md-1 border rounded-3 bg-transparent" enctype="multipart/form-data">
+          <h3 class="text-center"> {{page}} </h3>
+          <p><font color="red"> {{ message }} </font></p>
+            {% csrf_token %}
+                <div class="row">
+                  {%for field in form %}
+                  <div class="form-floating col-lg-6 my-1">
+                    {% if field.errors %}
+                          {{ field }}
+                        <div class="offset-4 col-8 is-invalid text-right">
+                          <small class="text-danger">
+                            {% for error in field.errors %}
+                              {{ error|escape }}
+                              <br/>
+                            {% endfor %}
+                          </small>
+                        </div>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+                    <label for="{{field.id}}" class="mt-1 ms-2" > {{ field.label }} </label>
+                  </div>
+                  {% endfor %}
+                </div>
+                
+              <hr class="my-4">
+              <button class="w-100 btn btn-primary" type="submit"> Suivant <i class="bi bi-arrow-right"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock%}

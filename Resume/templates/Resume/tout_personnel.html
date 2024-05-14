@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <style>
+        .ClickService{
+            cursor: pointer;
+        }
+    </style>
+
+     <!--  MODAL DETAIL DE L'ORDONNANCE -->
+
+     <div class="modal fade" id="ModalForm" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0 m-0 container-fluid bg-light small" >
+                <div class="container-fluid" id="ModalContent">
+                    
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!--  DETAIL PATIENT -->
+
+<div class="modal fade" id="ModalForm" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0 m-0 container-fluid small">
+            <div class="container-fluid" id="ModalContent">
+                
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- #############   END MODAL  ###########  -->
+
+    <main class="container-fluid small" style="min-height:30dvi;">
+        <div class="row small">
+            <div class="col-lg-3 overflow-auto border  bg-geserhos-light" style="min-height:40dvi;">
+                
+                <div id="tableService bg-geserhos-light" class=''>
+                    <div class="header small text-center p-2">
+                        <div class="input-group">
+                        <input type="search" class="form-control form-control-sm" name="q" id="rechPatient" placeholder="Recherche">
+                        <button class="btn btn-primary btn-sm"><i class="bi bi-search"></i></button>
+                        </div>
+                        <hr class="m-2"/>
+                        <div class="btn-group btn-group-sm">
+                            <a href="{% url 'ajout-personnel' %}" class="btn btn-outline-info" >
+                                Ajouter
+                            </a>
+                        </div>
+                    </div>
+                    <div class="list-group list-group-flush border-top border-bottom bg-geserhos-light overflow-auto " style="max-height:33vw;">
+                        {% for item in list_personnels %}
+                            <div class="list-group-item {% if personnel.id == item.id %} active {% endif %}" onclick="document.location='?pat={{item.id}}'" style="cursor: pointer;">
+                                {% if item.nom %}{{item.nom}}{%endif%}
+                                {% if item.prenom %}{{item.prenom}}{%endif%}
+                                {% if item.Age %}({{item.Age}}){%endif%}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 text-center bg-light">
+                {% if personnel %}
+                <!-- *************************   ONGLET DE NAVAIGATION  ********************** -->
+                <ul class="nav nav-tabs small shadow-sm">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="nav-Info-tap" data-bs-toggle="tab" type="button" data-bs-target="#tap-Info" role="tab" aria-controls="tap-Info" aria-selected="true">Informations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-Consul-tap" data-bs-toggle="tab" type="button" data-bs-target="#tap-Consul" role="tab" aria-controls="tap-Consul" aria-selected="false">Consultations</a>
+                    </li>
+                </ul>
+                <div id="PatientTabContent" class="tab-content small slide pointer-event bg-white">
+<!-- ############################# ONGLET Informations  ########################## -->
+                    <div class="tab-pane fade show active p-2" role="tabpanel" aria-labelledby="nav-Info-tap" id="tap-Info" style="min-height:35vw; max-height: 40vw;">
+                        <div class="container-fluid text-start " style="min-height: 35vw;">
+                            
+                        </div>
+                
+                    </div>
+<!-- ############################# ONGLET CONSULTATION MEDICALE  ########################## -->
+                    <div class="tab-pane fade show p-2" role="tabpanel" aria-labelledby="nav-Consul-tap" id="tap-Consul" style="min-height:35vw; max-height: 40vw;">
+                        <div class="container-fluid text-start "  style="min-height:35vw;">
+                            
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

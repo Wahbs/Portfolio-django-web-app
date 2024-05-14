@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    
+<main class="">
+  
+  <section class="min-vh-100" style="background-image:url({% static 'img/bg.png' %});background-position:top center;background-size:cover;" id="information">
+    <div class="container"  data-aos="fade-up" data-aos-delay="100">
+      <div class="col-lg-10 m-auto">
+        <span class="card-title h2">
+          <img src="{% static 'img/sommaire.png' %}" width="50" height="50" alt=""> Créez un Cv de qualité ! 
+        </span> <br>
+        <span class="card-subtitle">
+          Nous vous aiderons à produire un document digne de votre profil.
+        </span>
+        <br>
+        <span class="card-subtitle">
+          Prenez en main votre profil et montrez au monde entier qui vous êtes. <br>
+          Nous vous offrons : <br>
+        </span>
+      </div>
+      <div class="row m-3">
+        <div class="col-10 m-auto">
+          <span class="h6"><i class="bi bi-check-circle text-success"></i> Site web personnalisé <br></span>
+          <span class="h6"><i class="bi bi-check-circle text-success"></i> Production du CV <br></span>
+          <span class="h6"><i class="bi bi-check-circle text-success"></i> Votre portfolio complet <br></span>
+        </div>
+      </div>
+      <div class="container m-auto text-end flex-column d-flex">
+        <div class="row m-5">
+          <div class="col m-5">
+            <a href="{% url 'ajout-personnel' %}" class="btn btn-primary btn-lg rounded-5"> Lancer <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    
+
+    <!-- Feature services -->
+    <section id="services" class="featured-services min-vh-100"  style="background-image:url({% static 'img/bg.png' %});background-position:top center;background-size:cover;">
+      <div class="row">
+        <div class="col m-2 text-center">
+          <span class="h2"> Nos services d'experts </span>
+        </div>
+      </div>  
+      <div class="container aos-init aos-animate " data-aos="fade-up">
+          
+          <div class="row ">
+            <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-3">
+              <div class="icon-box aos-init" data-aos="fade-up" data-aos-delay="100">
+                <div class="icon text-center"><img src="{% static 'img/consultant.png' %}" width="100" height="100" alt=""></div>
+                <h4 class="title"><a href="">Consultant en informatique</a></h4>
+                <p class="description">
+                  Nous fournissons des conseils et des orientations d'experts sur diverses questions liées aux technologies de l'information, telles que la stratégie technologique, la mise en œuvre et l'optimisation.
+                </p>
+              </div>
+            </div>
+  
+            <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-3">
+              <div class="icon-box aos-init" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon text-center"><img src="{% static 'img/programmeur.png' %}" width="100" height="100" alt=""></div>
+                <h4 class="title"><a href="">Developpement de logiciels</a></h4>
+                <p class="description">
+                  Nous concevons, développons et gérons des applications et des systèmes logiciels pour des entreprises, des organisations ou des particuliers.
+                </p>
+              </div>
+            </div>
+  
+            <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-3">
+              <div class="icon-box aos-init" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon text-center"><img src="{% static 'img/creation-de-sites-web.png' %}" width="100" height="100" alt=""></div>
+                <h4 class="title"><a href="">Conception et developpement de site web</a></h4>
+                <p class="description">
+                  Nous créons et gérons des sites web, des applications web et des portails en ligne pour les entreprises et les organisations.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-3">
+              <div class="icon-box aos-init" data-aos="fade-up" data-aos-delay="400">
+                <div class="icon text-center"><img src="{% static 'img/mobile.png' %}" width="100" height="100" alt=""></div>
+                <h4 class="title"><a href="">Developpement d'application mobile</a></h4>
+                <p class="description">
+                  Nous développons des applications mobiles pour smartphones et tablettes, qui peuvent aider les entreprises à se connecter avec leurs clients et clients.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-3">
+              <div class="icon-box aos-init" data-aos="fade-up" data-aos-delay="400">
+                <div class="icon text-center"><img src="{% static 'img/data-analyst.png' %}" width="100" height="100" alt=""></div>
+                <h4 class="title"><a href="">Analyse des données</a></h4>
+                <p class="description">
+                  Nous appliquons des outils et des techniques d'analyse de données pour aider vos entreprises et vos organisations à mieux comprendre leurs opérations, leurs clients et leurs marchés.
+                </p>
+              </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-3">
+              <div class="icon-box aos-init" data-aos="fade-up" data-aos-delay="400">
+                <div class="icon text-center"><img src="{% static 'img/data-science.png' %}" width="100" height="100" alt=""></div>
+                <h4 class="title"><a href="">L'IA et le Machine Learning</a></h4>
+                <p class="description">
+                  Nous développons des solutions et des systèmes basés sur l'IA pour vos entreprises et organisations afin d'améliorer l'efficacité et la prise de décision.
+                </p>
+              </div>
+            </div>
+
+  
+          </div>
+  
+        </div>
+    </section>
+
+    <!-- ********** Section à propos ********************* -->
+    
+    <section class="min-vh-100" style="background-image:url({% static 'img/bg.png' %});background-position:top center;background-size:cover;" id="about">
+      <div class="container"  data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-10 m-auto">
+          <span class="card-title h2">
+            <div class="row">
+              <div class="col-3">
+                <img src="{% static 'img/communaute.png' %}" width="50" height="50" alt=""> 
+              </div>
+              <div class="col m-0 p-0">
+                Nous sommes une communauté active d'informaticiens
+              </div>
+            </div>
+          </span> <br>
+          <span class="card-subtitle">
+            Capable de resoudre des problemes complexes,
+          </span>
+          <br>
+          <span class="card-subtitle">
+            Nos solutions sont toutes exceptionnelles ! <br>
+          </span>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-5 m-auto">
+
+          </div>
+          <div class="col-lg-7 m-auto">
+            <form action="" name="form" method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="form-floating mt-1">
+                  <input type="text" name="nom" id="id_nom" class="form-control form-control-sm rounded-5 ps-4" placeholder="Nom complet">
+                  <label for="id_nom" class="form-label ms-3"> Nom complet</label>
+                </div>
+                <div class="form-floating col-lg-6 mt-1">
+                  <input type="text" name="phone" id="id_phone" class="form-control form-control-sm rounded-5 ps-4" placeholder="Telephone">
+                  <label for="id_phone" class="form-label ms-3"> Telephone </label>
+                </div>
+                <div class="form-floating col-lg-6 mt-1">
+                  <input type="email" name="email" id="id_email" class="form-control form-control-sm rounded-5 ps-4" placeholder="Adresse mail">
+                  <label for="id_email" class="form-label ms-3"> Adresse mail </label>
+                </div>
+                <div class="form-floating mt-1">
+                  <textarea name="message" id="id_message" cols="30" rows="5" class="form-control rounded-5 ps-4" placeholder="Messages" style="height: auto;"></textarea>
+                  <label for="id_message" class="form-label ms-3"> Messages </label>
+                </div>
+                <div class="row m-1">
+                  <input type="submit" value="Nous contacter" class="btn btn-primary rounded-5">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+</main>
+
+
+{% endblock %}
